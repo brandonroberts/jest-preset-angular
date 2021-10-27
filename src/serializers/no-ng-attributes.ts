@@ -53,7 +53,7 @@ const serializeTestFn = (val: Element): boolean =>
   );
 const test = (val: Element): boolean => jestDOMElementSerializer.test(val) && serializeTestFn(val);
 
-export = {
+export default {
   serialize,
   test,
 };

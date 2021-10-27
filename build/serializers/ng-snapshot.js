@@ -1,4 +1,3 @@
-"use strict";
 const ivyEnabled = () => {
     const { ɵivyEnabled } = require('@angular/core');
     return ɵivyEnabled;
@@ -49,7 +48,7 @@ const print = (fixture, print, indent, opts, colors) => {
         '>').replace(/\n^\s*\n/gm, '\n');
 };
 const test = (val) => typeof val === 'object' && Object.prototype.hasOwnProperty.call(val, 'componentRef');
-module.exports = {
+export default {
     print,
     test,
 };

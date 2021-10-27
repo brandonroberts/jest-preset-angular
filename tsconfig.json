@@ -12,7 +12,8 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "target": "es2015",
-    "module": "CommonJS",
+    "module": "esnext",
+    "moduleResolution": "node",
     "lib": ["esnext", "dom"],
     "types": ["node", "jest"]
   }

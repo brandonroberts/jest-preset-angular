@@ -1,10 +1,8 @@
-"use strict";
 var _a;
-Object.defineProperty(exports, "__esModule", { value: true });
-const child_process_1 = require("child_process");
-const path_1 = require("path");
+import { spawnSync } from 'child_process';
+import { sep } from 'path';
 const IGNORE_ARGS = ['--clearCache', '--help', '--init', '--listTests', '--showConfig'];
-const ANGULAR_COMPILER_CLI_PKG_NAME = `@angular${path_1.sep}compiler-cli`;
+const ANGULAR_COMPILER_CLI_PKG_NAME = `@angular${sep}compiler-cli`;
 const nodeModuleDirPath = findNodeModulesDirectory();
 function findNodeModulesDirectory() {
     let nodeModulesPath = '';
@@ -18,7 +16,7 @@ function findNodeModulesDirectory() {
 if (!process.argv.find((arg) => IGNORE_ARGS.includes(arg))) {
     if (nodeModuleDirPath) {
         process.stdout.write('ngcc-jest-processor: running ngcc\n');
-        const { status, error } = child_process_1.spawnSync(process.execPath, [
+        const { status, error } = spawnSync(process.execPath, [
             require.resolve('@angular/compiler-cli/ngcc/main-ngcc.js'),
             '--source',
             nodeModuleDirPath,

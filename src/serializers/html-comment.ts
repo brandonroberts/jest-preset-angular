@@ -5,7 +5,7 @@ const test = (value: any): boolean =>
 
 const serialize = (): string => '';
 
-export = {
+export default {
   serialize,
   test,
 };

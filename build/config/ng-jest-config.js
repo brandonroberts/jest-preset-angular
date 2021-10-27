@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NgJestConfig = void 0;
-const config_set_1 = require("ts-jest/dist/config/config-set");
-class NgJestConfig extends config_set_1.ConfigSet {
+import { ConfigSet } from 'ts-jest/dist/config/config-set';
+export class NgJestConfig extends ConfigSet {
     _resolveTsConfig(compilerOptions, resolvedConfigFile) {
         const result = super._resolveTsConfig(compilerOptions, resolvedConfigFile);
         result.options.enableIvy = true;
@@ -15,4 +12,3 @@ class NgJestConfig extends config_set_1.ConfigSet {
         return result;
     }
 }
-exports.NgJestConfig = NgJestConfig;
