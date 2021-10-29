@@ -21,7 +21,8 @@ module.exports = {
     '/src/__tests__/__mocks__/',
     '/src/__tests__/__helpers__/',
   ],
+  transformIgnorePatterns: ['node_modules/(?!@angular)'],
   transform: {
-    '^.+\\.(ts|js|html)$': '<rootDir>/build/index.js',
+    '^.+\\.(ts|js|html|mjs)$': '<rootDir>/build/index.js',
   },
 };
