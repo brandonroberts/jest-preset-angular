@@ -1,8 +1,11 @@
+"use strict";
 var _a;
-import { spawnSync } from 'child_process';
-import { sep } from 'path';
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const child_process_1 = require("child_process");
+const path_1 = (0, tslib_1.__importStar)(require("path"));
 const IGNORE_ARGS = ['--clearCache', '--help', '--init', '--listTests', '--showConfig'];
-const ANGULAR_COMPILER_CLI_PKG_NAME = `@angular${sep}compiler-cli`;
+const ANGULAR_COMPILER_CLI_PKG_NAME = `@angular${path_1.sep}compiler-cli`;
 const nodeModuleDirPath = findNodeModulesDirectory();
 function findNodeModulesDirectory() {
     let nodeModulesPath = '';
@@ -16,8 +19,16 @@ function findNodeModulesDirectory() {
 if (!process.argv.find((arg) => IGNORE_ARGS.includes(arg))) {
     if (nodeModuleDirPath) {
         process.stdout.write('ngcc-jest-processor: running ngcc\n');
-        const { status, error } = spawnSync(process.execPath, [
-            require.resolve('@angular/compiler-cli/ngcc/main-ngcc.js'),
+        let ngccPath;
+        try {
+            ngccPath = require.resolve('@angular/compiler-cli/ngcc/main-ngcc.js');
+        }
+        catch (_b) {
+            const compilerCliNgccPath = require.resolve('@angular/compiler-cli/ngcc');
+            ngccPath = path_1.default.resolve(compilerCliNgccPath.substring(0, compilerCliNgccPath.lastIndexOf(path_1.default.sep)), 'main-ngcc.js');
+        }
+        const { status, error } = (0, child_process_1.spawnSync)(process.execPath, [
+            ngccPath,
             '--source',
             nodeModuleDirPath,
             '--properties',

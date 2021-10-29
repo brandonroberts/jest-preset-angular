@@ -1,5 +1,7 @@
-import { plugins } from 'pretty-format';
-const jestDOMElementSerializer = plugins.DOMElement;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const pretty_format_1 = require("pretty-format");
+const jestDOMElementSerializer = pretty_format_1.plugins.DOMElement;
 const attributesToRemovePatterns = ['ng-reflect', '_nghost', '_ngcontent', 'ng-version'];
 const attributesToClean = {
     class: [/^(?:mat|cdk|ng).*-\w*\d+-\d+$/, /^ng-star-inserted$/],
@@ -35,7 +37,7 @@ const serialize = (node, ...rest) => {
 const serializeTestFn = (val) => val.attributes &&
     Object.values(val.attributes).some((attribute) => hasAttributesToRemove(attribute) || hasAttributesToClean(attribute));
 const test = (val) => jestDOMElementSerializer.test(val) && serializeTestFn(val);
-export default {
+exports.default = {
     serialize,
     test,
 };

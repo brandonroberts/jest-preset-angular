@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const ivyEnabled = () => {
     const { ɵivyEnabled } = require('@angular/core');
     return ɵivyEnabled;
@@ -48,7 +50,7 @@ const print = (fixture, print, indent, opts, colors) => {
         '>').replace(/\n^\s*\n/gm, '\n');
 };
 const test = (val) => typeof val === 'object' && Object.prototype.hasOwnProperty.call(val, 'componentRef');
-export default {
+exports.default = {
     print,
     test,
 };
