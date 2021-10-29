@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NgJestCompiler = void 0;
-const compiler_cli_1 = require("@angular/compiler-cli");
 const ts_compiler_1 = require("ts-jest/dist/compiler/ts-compiler");
+const downlevel_ctor_1 = require("../transformers/downlevel-ctor");
 const replace_resources_1 = require("../transformers/replace-resources");
 class NgJestCompiler extends ts_compiler_1.TsCompiler {
     constructor(configSet, jestCacheFS) {
@@ -70,7 +70,7 @@ class NgJestCompiler extends ts_compiler_1.TsCompiler {
         return Object.assign(Object.assign(Object.assign({}, super._makeTransformers(customTransformers).after), super._makeTransformers(customTransformers).afterDeclarations), { before: [
                 ...customTransformers.before.map((beforeTransformer) => beforeTransformer.factory(this, beforeTransformer.options)),
                 (0, replace_resources_1.replaceResources)(this),
-                (0, compiler_cli_1.constructorParametersDownlevelTransform)(this.program),
+                (0, downlevel_ctor_1.constructorParametersDownlevelTransform)(this.program),
             ] });
     }
 }

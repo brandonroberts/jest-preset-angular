@@ -73,9 +73,9 @@ jobs:
           cache: yarn
       - name: install
         run: yarn --immutable
-      - name: run unit tests
-        run: yarn test
-      - name: run E2E tests in CJS mode
+      - name: Run unit tests
+        run: yarn test-unit-ci
+      - name: Run E2E tests in CJS mode
         run: yarn e2e-cjs
       - name: run E2E tests in ESM mode
         run: yarn e2e-esm
