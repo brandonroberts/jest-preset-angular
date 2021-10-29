@@ -3,7 +3,7 @@
  * and adjusted to work with Jest
  */
 import { spawnSync } from 'child_process';
-import { sep } from 'path';
+import path, { sep } from 'path';
 
 const IGNORE_ARGS = ['--clearCache', '--help', '--init', '--listTests', '--showConfig'];
 const ANGULAR_COMPILER_CLI_PKG_NAME = `@angular${sep}compiler-cli`;
@@ -30,10 +30,20 @@ if (!process.argv.find((arg) => IGNORE_ARGS.includes(arg))) {
     // that we cannot setup multiple cluster masters with different options.
     // - We will not be able to have concurrent builds otherwise Ex: App-Shell,
     // as NGCC will create a lock file for both builds and it will cause builds to fails.
+    let ngccPath: string;
+    try {
+      ngccPath = require.resolve('@angular/compiler-cli/ngcc/main-ngcc.js');
+    } catch {
+      const compilerCliNgccPath = require.resolve('@angular/compiler-cli/ngcc');
+      ngccPath = path.resolve(
+        compilerCliNgccPath.substring(0, compilerCliNgccPath.lastIndexOf(path.sep)),
+        'main-ngcc.js',
+      );
+    }
     const { status, error } = spawnSync(
       process.execPath,
       [
-        require.resolve('@angular/compiler-cli/ngcc/main-ngcc.js'),
+        ngccPath,
         '--source' /** basePath */,
         nodeModuleDirPath,
         '--properties' /** propertiesToConsider */,
