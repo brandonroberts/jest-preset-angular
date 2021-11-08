@@ -29,4 +29,11 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('example-app-v13 app is running!');
   });
+
+  it('should handle snapshots with null values', () => {
+    expect({
+      test: true,
+      second: null
+    }).toMatchSnapshot();
+  })
 });
